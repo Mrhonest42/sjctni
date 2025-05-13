@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>தங்கவூர் மறைமாவட்டம்</h1>
+            <h4>கத்தோலிக்க மாணவ, மாணவியர் கல்வி உதவி தொகை</h4>
+        </div>
+
+        <!-- மாணாக்கர்களின் விபரங்கள் -->
+        <div class="students details">
+            <div class="col left">
+                <div class="name-input"><label for="name">பெயர்:</label><input type="text" id="name"></div>
+                <div class="dob-input"><labe for="dob">பிறந்த தேதி: </label><input type="date" id="dob"></div>
+                <div class="village-input"><label>ஊர்: </label><input type="text" name="" id=""></div>
+                <div class="input"><label>பங்கின் பெயர்: </label><input type="text" id=""></div>
+                <div class="input"><label>சாதியின் பெயர்: </label><input type="text" id=""></div>
+                <div class="input">
+                    <label for="caste">சாதி: </label>
+                    <select id="caste">
+                    <option value="SC">SC</option>
+                    <option value="ST">ST</option>
+                    <option value="BC">BC</option>
+                    <option value="உட்பிரிவு">உட்பிரிவு</option>
+                </select></div>
+                <div class="input"><label class="orphan">Total Orphan: </label>
+                    <select id="orphan">
+                        <option value="ஆம்">ஆம்</option>
+                        <option value="இல்லை">இல்லை</option>
+                    </select>
+                </div>
+                <div class="input"><label for="semi-orphan">Semi Orphan:  </label>
+                    <select id="semi-orphan">
+                        <option value="ஆம்">ஆம்</option>
+                        <option value="இல்லை">இல்லை</option>
+                    </select>
+                </div>    
+            </div>
+            <div class="col right">
+                <div class="upload-img">
+                    <input type="image" alt="Upload image">
+                </div>
+            </div>
+        </div>
+
+<!-- குடும்ப நபர்கள் விபரம் -->
+        <div class="family-details">
+            <table>
+                <thead>
+                    <tr>
+                        <td>குடும்ப நபர்கள் விபரம்</td>
+                        <td>பெயர்</td>
+                        <td>தொழில்</td>
+                        <td>ஆண்டு வருமானம்</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>தந்தை / காப்பாளர் பெயர்</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>தாய் / காப்பாளர் பெயர்</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>உடன்பிறப்புகள்</td>
+                        <td>பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர்</td>
+                        <td>பயிலும் ஆண்டு</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- பெற்றோர் நிரந்திர இருப்பிட முகவரி -->
+        <div>
+            <table>
+                <thead>
+                    <tr><td>பெற்றோர் நிரந்திர இருப்பிட முகவரி:</td></tr>
+                </thead>
+                <tbody>
+                    <tr><td><textarea row="30" cols="30"></textarea></tr>
+                    <tr><td><label for="distric">மாவட்டம்</label><input type="text" id="distric"></td><td><label for="phoneNO">அலைபேசி</label><input type="text"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- கல்வி கற்கும் விபரம்  -->
+        <div>
+            <table>
+                <thead>
+                    <tr><td>கல்வி கற்கும் விபரம்: </td></tr>
+                </thead>
+                <tbody>
+                    <tr><td><label>பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர்: </label></td><input type="text"></tr>
+                    <tr><td>முகவரி: </td></tr>
+                    <tr><td><textarea cols="30" rows="10"></textarea></td></tr>
+                    <tr><td><label for="detail">பயிலும் பாடப்பிரிவில் விபரம் / Name of the Subject: </label><input type="text"></td></tr>
+                    <tr><td><label>படிப்பின் மொத ஆண்டுகள்</label><input type="text"></td><td><label>தற்பொழுது பயிலும் ஆண்டு</label></td><input type="text"></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+        <div>
+            <p>கடந்த ஆண்டுகளில் எல்லா பாடப்பிரிவில் தேர்ச்சி பெற்றவர்களுக்கு மற்றும் தொகை வழங்கப்படும். கடந்த ஆண்டுகளில் மதிப்பெண் பட்டியல் நகல் இணைக்கப்படவேண்டும்</p>
+        </div>
+
+        <div>
+            <ul>
+                <li><p>அரசு சம்பளம் பெறும் ஆசிரியர் மற்றும் அரசுப்பணி செய்யும் நிரந்தர மாத ஊதியம் பெற்றோர்களின் பிள்ளைகள் இதற்கு மனு செய்யக்கூடாது</p></li>
+                <li><p>படிவங்கள் அனைத்தும் பங்கு பணியாளர்கள்தான் அனுப்ப வேண்டும். தனி நபரிடமிருந்து விண்ணப்பப் படிவம் பெறப்படமாட்டாது</p></li>
+                <li><p>ஒரு குடும்பத்திலிருந்து ஒரு மாணவருக்கு மட்டுமே உதவித்தொகை வழங்கப்படும்</p></li>
+                <li><p>மெட்ரிக், CBSE மற்றும் Residential பள்ளிகளில் பயிலும் விடுதி மாணவர்களுக்கு இந்த உதவித்தொகை வழங்கப்படமாட்டாது</p></li>
+            </ul>
+        </div>
+
+        <div>
+            <p>முழுவிபரங்கள் அளிக்கப்படாத / தவறான விபரங்கள் அடங்கிய குறித்த நாட்களுக்கு ஒப்படைக்கப்படாத விண்ணப்பங்கள் நிராகரிக்கப்படும்.</p>
+        </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
