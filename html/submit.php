@@ -13,7 +13,21 @@ $casteName = $_POST['casteName'];
 $caste = $_POST['caste'];
 $orphan = $_POST['orphan'];
 $semiOrphan = $_POST['semiOrphan'];
-$image = $_POST['image'];
+
+if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+    $targetDir = "uploads/";
+    $imagePath = $targetDir . basename($_FILES["image"]["name"]);
+
+    move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+}
+
+$allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+if (!in_array($_FILES["image"]["type"], $allowedTypes)) {
+    die("Only JPG, JPEG, and PNG files are allowed.");
+}
+
+
+$image = $imagePath;
 $fm1 = $_POST['fm1'];
 $fm1Occupation = $_POST['fm1-occupation'];
 $fm1Income = $_POST['fm1-income'];
@@ -38,19 +52,18 @@ $subject = $_POST['subject'];
 $years = $_POST['years'];
 $currentYear = $_POST['current-year'];
 
-if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-    $targetDir = "uploads/";
-    $imagePath = $targetDir . basename($_FILES["image"]["name"]);
-
-    move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
-}
-
 $sql = "INSERT INTO STUDENTS
     (name, dob,place,priestPlace,casteName, caste, orphan, semiOrphan, image, fm1,fm1Occupation, fm1Income, fm2, fm2Occupation, fm2Income, s1, s1Study, s1Year, s2, s2Study, s2Year, s3, s3Study, s3Year, address, district, phoneNo, schoolCollege, schoolCollegeAddress, subject, years, currentYear)
     VALUES
     (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssssssssississississississsii", $name, $dob,$place,$priestPlace,$casteName, $caste, $orphan, $semiOrphan, $image, $fm1,$fm1Occupation, $fm1Income, $fm2, $fm2Occupation, $fm2Income, $s1, $s1Study, $s1Year, $s2, $s2Study, $s2Year, $s3, $s3Study, $s3Year, $address, $district, $phoneNo, $schoolCollege, $schoolCollegeAddress, $subject, $years, $currentYear);
+$stmt->bind_param("ssssssssssssssssssssssssssss", 
+    $name, $dob, $place, $priestPlace, $casteName, $caste, $orphan, $semiOrphan, 
+    $image, $fm1, $fm1Occupation, $fm1Income, $fm2, $fm2Occupation, $fm2Income,
+    $s1, $s1Study, $s1Year, $s2, $s2Study, $s2Year, $s3, $s3Study, $s3Year,
+    $address, $district, $phoneNo, $schoolCollege, $schoolCollegeAddress,
+    $subject, $years, $currentYear
+);
 
 if($stmt->execute()){
     echo "Data saved successfully";
