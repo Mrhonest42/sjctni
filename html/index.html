@@ -10,48 +10,94 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src='main.js'></script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            border: 2px solid crimson;
+            background-color: crimson; 
+            color: #fff; 
+            width: 100px;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        button:hover{
+            border-color: crimson;
+            color: crimson;
+            background-color: #fff;
+        }
+        input{
+            padding: 10px;
+            margin: 0;
+            outline: none;
+        }
+        select{
+            padding: 5px;
+        }
+        table thead td{
+            color: #1e5b9c;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+    .image,
+    table {
+        width: 100% !important;
+    }
+    button {
+        width: 100%;
+    }
+}
+    </style>
 </head>
 <body>
-    <div class="container border border-dark mx-auto p-3">
-        <div class="container border border-dark mx-auto p-3 m-4">
-            <h1>தங்கவூர் மறைமாவட்டம்</h1>
-            <h4>கத்தோலிக்க மாணவ, மாணவியர் கல்வி உதவி தொகை</h4>
+    <div class="container mx-auto p-3 ">
+        <div class="container border border-info bg-info rounded mx-auto p-3 m-4">
+            <h1 class="text-center text-success">தஞ்சாவூர் மறைமாவட்டம்</h1>
+            <h4 class="text-center text-primary">கத்தோலிக்க மாணவ, மாணவியர் கல்வி உதவி தொகை</h4>
         </div>
 
         <!-- மாணாக்கர்களின் விபரங்கள் -->
-        <div class="students details d-flex justify-content-space-between">
-            <div class="col left border border-dark mx-auto p-3 m-4 w-100">
-                <div class="name-input w-100"><label for="name">பெயர்:</label><input type="text" id="name"></div>
-                <div class="dob-input"><labe for="dob">பிறந்த தேதி: </label><input type="date" id="dob"></div>
-                <div class="village-input"><label>ஊர்: </label><input type="text" name="" id=""></div>
-                <div class="input"><label>பங்கின் பெயர்: </label><input type="text" id=""></div>
-                <div class="input"><label>சாதியின் பெயர்: </label><input type="text" id=""></div>
-                <div class="input">
-                    <label for="caste">சாதி: </label>
-                    <select id="caste">
+         <div>
+            <p>மாணாக்கர்களின் விபரங்கள் / Students details </p>
+        <div class="d-flex justify-content-space-between align-items-center mt-3 mb-3">
+          <table class="col left w-50 border border-dark mx-auto p-3 mb-3">
+            <tbody>
+                <tr><td class="border border-dark mx-auto p-3">பெயர் / Name:</td><td class="border border-dark mx-auto p-3"><input type="text"></td></tr>
+                <tr><td class="border border-dark mx-auto p-3">பிறந்த தேதி / Date of Birth: </td><td class="border border-dark mx-auto p-3"><input type="text"></td></tr>
+                <tr><td class="border border-dark mx-auto p-3">பிறந்த ஊர் / Birthplace:</td><td class="border border-dark mx-auto p-3"><input type="text"></td></tr>
+                <tr><td class="border border-dark mx-auto p-3">பங்கின் பெயர் / Priest name: </td><td class="border border-dark mx-auto p-3"><input type="text"></td></tr>
+                <tr><td class="border border-dark mx-auto p-3">சாதியின் பெயர் / Caste name: </td><td class="border border-dark mx-auto p-3"><input type="text"></td></tr>
+                <tr><td class="border border-dark mx-auto p-3">சாதி / Caste: </td><td class="border border-dark mx-auto p-3"><select>
                     <option value="SC">SC</option>
                     <option value="ST">ST</option>
                     <option value="BC">BC</option>
                     <option value="உட்பிரிவு">உட்பிரிவு</option>
-                </select></div>
-                <div class="input"><label class="orphan">Total Orphan: </label>
-                    <select id="orphan">
-                        <option value="ஆம்">ஆம்</option>
-                        <option value="இல்லை">இல்லை</option>
-                    </select>
-                </div>
-                <div class="input"><label for="semi-orphan">Semi Orphan:  </label>
-                    <select id="semi-orphan">
-                        <option value="ஆம்">ஆம்</option>
-                        <option value="இல்லை">இல்லை</option>
-                    </select>
-                </div>    
-            </div>
-            <div class="col right border border-dark mx-auto p-3 m-4 w-50 d-flex justify-content-center align-items-center">
-                <div class="upload-img">
-                    <input type="image" src="/images/" alt="Upload image">
-                </div>
-            </div>
+                </select></td></tr>
+                <tr class="d-flex justify-content-space-between w-100"><td class="p-3"><label class="orphan">Total Orphan: </label><select id="orphan">
+                        <option value="ஆம்">ஆம் / Yes</option>
+                        <option value="இல்லை">இல்லை / No</option>
+                    </select></td>
+                <td class="p-3"><label for="semi-orphan">Semi Orphan:  </label><select id="semi-orphan">
+                        <option value="ஆம்">ஆம் / Yes</option>
+                        <option value="இல்லை">இல்லை / No</option>
+                    </select></td></tr>
+            </tbody>
+          </table>
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+  <form action="upload.php" method="post" enctype="multipart/form-data" class="w-100 p-4 border rounded bg-light">
+    <label for="image" class="form-label fs-4 text-center w-100">Upload your Image</label>
+    <input class="form-control mb-3" type="file" name="image" accept="image/*" required>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+  </form>
+</div>
+
+        </div>
         </div>
 
 <!-- குடும்ப நபர்கள் விபரம் -->
@@ -59,96 +105,88 @@
             <table class="border border-dark mx-auto w-100">
                 <thead>
                     <tr class="border border-dark mx-auto">
-                        <td class="border border-dark mx-auto p-2">குடும்ப நபர்கள் விபரம்</td>
-                        <td class="border border-dark mx-auto p-2">பெயர்</td>
-                        <td class="border border-dark mx-auto p-2">தொழில்</td>
-                        <td class="border border-dark mx-auto p-2">ஆண்டு வருமானம்</td>
+                        <td class="border border-dark mx-auto p-2">குடும்ப நபர்கள் விபரம் / Family Members Details</td>
+                        <td class="border border-dark mx-auto p-2">பெயர் / Name</td>
+                        <td class="border border-dark mx-auto p-2">தொழில் / Occupation</td>
+                        <td class="border border-dark mx-auto p-2">ஆண்டு வருமானம் / Annual Income</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="border border-dark mx-auto p-2">தந்தை / காப்பாளர் பெயர்</td>
+                        <td class="border border-dark mx-auto p-2">தந்தை / காப்பாளர் பெயர் / Father / Guardian Name</td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                     </tr>
                     <tr>
-                        <td class="border border-dark mx-auto p-2">தாய் / காப்பாளர் பெயர்</td>
+                        <td class="border border-dark mx-auto p-2">தாய் / காப்பாளர் பெயர் / Mother / Guardian Name</td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                         <td class="border border-dark mx-auto p-2"><input type="text" class="w-100 p-2"></td>
                     </tr>
+                </tbody>
+            </table>
+            <table class="border border-dark border-top-0 mx-auto w-100">
+                <thead>
                     <tr>
-                        <td class="border border-dark mx-auto p-2">உடன்பிறப்புகள்</td>
-                        <td class="border border-dark mx-auto p-2">பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர்</td>
-                        <td class="border border-dark mx-auto p-2">பயிலும் ஆண்டு</td>
+                        <td class="border border-dark mx-auto p-2">உடன்பிறப்புகள் / Siblings</td>
+                        <td class="border border-dark mx-auto p-2">பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர் / School / College / Institution Name</td>
+                        <td class="border border-dark mx-auto p-2">பயிலும் ஆண்டு / Pursuing Year</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
                     </tr>
                     <tr>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
                     </tr>
                     <tr>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
-                        <td class="border border-dark mx-auto p-2"><input type="text"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
+                        <td class="border border-dark mx-auto p-2"><input type="text" class="w-100"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- பெற்றோர் நிரந்திர இருப்பிட முகவரி -->
-        <div class="container border border-dark mx-auto w-100 mt-4 ">
-            <table class="border border-dark mx-auto w-100" >
+        <div class="container border border-dark mx-auto w-100 mt-4 p-2">
+            <table class="border mx-auto w-100 p-3">
                 <thead>
-                    <tr><td>பெற்றோர் நிரந்திர இருப்பிட முகவரி:</td></tr>
+                    <tr><td class="p-2">பெற்றோர் நிரந்திர இருப்பிட முகவரி / Parent's Permanant Address:</td></tr>
                 </thead>
                 <tbody>
-                    <tr><td><textarea row="30" cols="30"></textarea></tr>
-                    <tr><td><label for="distric">மாவட்டம்</label><input type="text" id="distric"></td><td><label for="phoneNO">அலைபேசி</label><input type="text"></td></tr>
+                    <tr><td class="p-2"><textarea row="30" cols="30"></textarea></tr>
+                    <tr><td class="p-2">மாவட்டம் / District: <input type="text" id="distric"></td><td>அலைபேசி / Phone no: <input type="text" ></td></tr>
                 </tbody>
             </table>
         </div>
 
         <!-- கல்வி கற்கும் விபரம்  -->
-        <div>
-            <table>
+        <div class="container border border-dark mx-auto w-100 mt-4 p-2">
+            <table class="border mx-auto w-100">
                 <thead>
-                    <tr><td>கல்வி கற்கும் விபரம்: </td></tr>
+                    <tr><td class="p-2">கல்வி கற்கும் விபரம் / Educational Details: </td></tr>
                 </thead>
-                <tbody>
-                    <tr><td><label>பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர்: </label></td><input type="text"></tr>
-                    <tr><td>முகவரி: </td></tr>
-                    <tr><td><textarea cols="30" rows="10"></textarea></td></tr>
-                    <tr><td><label for="detail">பயிலும் பாடப்பிரிவில் விபரம் / Name of the Subject: </label><input type="text"></td></tr>
-                    <tr><td><label>படிப்பின் மொத ஆண்டுகள்</label><input type="text"></td><td><label>தற்பொழுது பயிலும் ஆண்டு</label></td><input type="text"></tr>
+                <tbody class="w-100">
+                    <tr class="w-100"><td class="w-100 p-2">பள்ளி / கல்லூரி / நிறுவனத்தின் பெயர் / School / College / Institution Name: </td><td class="p-2"><input type="text"></td></tr>
+                    <tr><td class="p-2">முகவரி / Address: </td></tr>
+                    <tr><td><textarea cols="60" rows="3"></textarea></td></tr>
+                    <tr><td>பயிலும் பாடப்பிரிவில் விபரம் / Name of the Subject: </td><td><input type="text"></td></tr>
+                    <tr><td>படிப்பின் மொத்த ஆண்டுகள் / Total Years of Study <input type="text"></td><td>தற்பொழுது பயிலும் ஆண்டு / Currently Pursuing year:  </td><td><input type="text"></td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div>
-        <div>
-            <p>கடந்த ஆண்டுகளில் எல்லா பாடப்பிரிவில் தேர்ச்சி பெற்றவர்களுக்கு மற்றும் தொகை வழங்கப்படும். கடந்த ஆண்டுகளில் மதிப்பெண் பட்டியல் நகல் இணைக்கப்படவேண்டும்</p>
-        </div>
-
-        <div>
-            <ul>
-                <li><p>அரசு சம்பளம் பெறும் ஆசிரியர் மற்றும் அரசுப்பணி செய்யும் நிரந்தர மாத ஊதியம் பெற்றோர்களின் பிள்ளைகள் இதற்கு மனு செய்யக்கூடாது</p></li>
-                <li><p>படிவங்கள் அனைத்தும் பங்கு பணியாளர்கள்தான் அனுப்ப வேண்டும். தனி நபரிடமிருந்து விண்ணப்பப் படிவம் பெறப்படமாட்டாது</p></li>
-                <li><p>ஒரு குடும்பத்திலிருந்து ஒரு மாணவருக்கு மட்டுமே உதவித்தொகை வழங்கப்படும்</p></li>
-                <li><p>மெட்ரிக், CBSE மற்றும் Residential பள்ளிகளில் பயிலும் விடுதி மாணவர்களுக்கு இந்த உதவித்தொகை வழங்கப்படமாட்டாது</p></li>
-            </ul>
-        </div>
-
-        <div>
-            <p>முழுவிபரங்கள் அளிக்கப்படாத / தவறான விபரங்கள் அடங்கிய குறித்த நாட்களுக்கு ஒப்படைக்கப்படாத விண்ணப்பங்கள் நிராகரிக்கப்படும்.</p>
-        </div>
-        </div>
+        <!-- Submit button -->
+         <div class="w-100 p-3">
+            <button type="submit">Submit</button>
+         </div>
     </div>
     <script src="script.js"></script>
 </body>
