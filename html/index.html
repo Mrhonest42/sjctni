@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        button {
+            border: 2px solid crimson;
+            background-color: crimson;
+            color: #fff;
+            width: 100%;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            border-color: crimson;
+            color: crimson;
+            background-color: #fff;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <form action="submit.php" method="post" enctype="multipart/form-data">
+        <div class="text-center mb-4">
+            <h1 class="text-success">தஞ்சாவூர் மறைமாவட்டம்</h1>
+            <h4 class="text-primary">கத்தோலிக்க மாணவ, மாணவியர் கல்வி உதவி தொகை</h4>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <h5>மாணாக்கர்களின் விபரங்கள் / Students details</h5>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><td>பெயர் / Name:</td><td><input type="text" name="name"></td></tr>
+                        <tr><td>பிறந்த தேதி / DOB:</td><td><input type="text" name="dob"></td></tr>
+                        <tr><td>பிறந்த ஊர் / Birthplace:</td><td><input type="text" name="place"></td></tr>
+                        <tr><td>பங்கின் பெயர் / Priest name:</td><td><input type="text" name="priestPlace"></td></tr>
+                        <tr><td>சாதியின் பெயர் / Caste name:</td><td><input type="text" name="casteName"></td></tr>
+                        <tr><td>சாதி / Caste:</td><td>
+                            <select name="caste">
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="BC">BC</option>
+                                <option value="உட்பிரிவு">உட்பிரிவு</option>
+                            </select>
+                        </td></tr>
+                        <tr><td>Total Orphan:</td><td>
+                            <select name="orphan"><option>ஆம் / Yes</option><option>இல்லை / No</option></select>
+                        </td></tr>
+                        <tr><td>Semi Orphan:</td><td>
+                            <select name="semiOrphan"><option>ஆம் / Yes</option><option>இல்லை / No</option></select>
+                        </td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <label for="image" class="form-label fs-5 text-center w-100">Upload your Image</label>
+                    <input class="form-control mb-3" type="file" name="image" accept="image/*" required>
+                    <div class="text-center">
+                        <button type="submit">Upload</button>
+                    </div>
+            </div>
+        </div>
+
+        <h5 class="mt-5">குடும்ப நபர்கள் விபரம் / Family Members Details</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>பெயர்</th>
+                    <th>தொழில்</th>
+                    <th>ஆண்டு வருமானம்</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="fm1" placeholder=" Father / Guardian Name / தந்தை / காப்பாளர் பெயர்"></td>
+                    <td><input type="text" name="fm1-occupation"></td>
+                    <td><input type="text" name="fm1-income"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="fm2" placeholder="Mother / Guardian Name / தாய் / காப்பாளர் பெயர்"></td>
+                    <td><input type="text" name="fm2-occupation"></td>
+                    <td><input type="text" name="fm2-income"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h5 class="mt-4">உடன்பிறப்புகள் / Siblings</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>பெயர்</th>
+                    <th>பள்ளி / கல்லூரி</th>
+                    <th>பயிலும் ஆண்டு</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><input type="text" name="s1"></td><td><input type="text" name="s1-study"></td><td><input type="text" name="s1-year"></td></tr>
+                <tr><td><input type="text" name="s2"></td><td><input type="text" name="s2-study"></td><td><input type="text" name="s2-year"></td></tr>
+                <tr><td><input type="text" name="s3"></td><td><input type="text" name="s3-study"></td><td><input type="text" name="s3-year"></td></tr>
+            </tbody>
+        </table>
+
+        <h5 class="mt-4">பெற்றோர் நிரந்திர முகவரி / Parent's Address</h5>
+        <div class="mb-3">
+            <textarea rows="3" class="form-control" name="address"></textarea>
+        </div>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label>மாவட்டம் / District</label>
+                <input type="text" class="form-control" name="district">
+            </div>
+            <div class="col-md-6">
+                <label>அலைபேசி / Phone no</label>
+                <input type="text" class="form-control" name="phoneNo">
+            </div>
+        </div>
+
+        <h5 class="mt-4">கல்வி கற்கும் விபரம் / Educational Details</h5>
+        <table class="table table-bordered">
+            <tbody>
+                <tr><td>பள்ளி / கல்லூரி பெயர்</td><td><input type="text" name="school-college"></td></tr>
+                <tr><td>முகவரி</td><td><textarea class="form-control" rows="2" name="school-college-address"></textarea></td></tr>
+                <tr><td>பாடப்பிரிவு</td><td><input type="text" name="subject"></td></tr>
+                <tr><td>மொத்த ஆண்டுகள்</td><td><input type="text" name="years"></td></tr>
+                <tr><td>தற்போதைய ஆண்டு</td><td><input type="text" name="current-year"></td></tr>
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <button type="submit">Submit</button>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
