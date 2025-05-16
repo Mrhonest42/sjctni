@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            border: 2px solid crimson;
+            background-color: crimson;
+            color: #fff;
+            width: 100%;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            border-color: crimson;
+            color: crimson;
+            background-color: #fff;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="date"] {
+  appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Chrome/Safari */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  background-image: url('calendar-icon.svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
+}
+        textarea {
+            resize: vertical;
+        }
+        h5{
+            color: #135513;
+            margin: 20px 10px;
+            font-weight: 600;
+        }
+        .form-control{
+            border-color: #5b5b5b;
+        }
+        footer{
+            background-color: #020115;
+        }
+        span{
+            color: #e64444;
+        }
+    </style>
+</head>
+<body>
+    <header class="w-100 bg-info p-4 d-flex justify-content-center gap-5">
+        <div class="logo d-flex justify-content-center align-items-center p-3" style="background-color: #fff; border-radius: 5px; height: 80px; transform: translate(5%,5%);">
+            <img src="https://tanjorediocese.org/images/logo-web.png" width="200" alt="">
+        </div>
+        <div class="text-center mb-4">
+            <h1 style="color:#fff">தஞ்சாவூர் மறைமாவட்டம்</h1>
+            <h4 style="color:#E1341E">கத்தோலிக்க மாணவ, மாணவியர் கல்வி உதவி தொகை</h4>
+        </div>
+    </header>
+    <div class="container my-4">
+        <form id="form">
+
+        <div class="row">
+            <div class="col">
+                <h5>மாணாக்கர்களின் விபரங்கள் / Students details</h5>
+                <!-- first table -->
+                <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td><b>பெயர் / Name:<span>*</span></b></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
+                <td><b>பிறந்த தேதி / Date of Birth:<span>*</span></b></td>
+                <td><input type="date" name="dob" id="dob" class="form-control" required="required"></td>
+                <td><b>பிறந்த ஊர் / Birthplace:<span>*</span></b></td>
+                <td><input type="text" id="place" name="place" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><b>பங்கின் பெயர் / Diocese name:<span>*</span></b></td>
+                <td><input type="text" name="priestPlace" id="priestPlace" class="form-control"></td>
+                <td><b>சாதியின் பெயர் / Sub Caste name:<span>*</span></b></td>
+                <td><input type="text" name="casteName" id="casteName" class="form-control"></td>
+                <td><b>சாதி / Caste:<span>*</span></b></td>
+                <td>
+                    <select name="caste" id="caste" class="form-control">
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="BC">BC</option>
+                        <option value="உட்பிரிவு">உட்பிரிவு</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><b>பெற்றோரை இழந்தவரா? / Orphan:<span>*</span></b></td>
+                <td>
+                    <select name="orphan" id="orphan" class="form-control">
+                        <option>ஆம் / Yes</option>
+                        <option>இல்லை / No</option>
+                    </select>
+                </td>
+                <td><b>Semi Orphan:<span>*</span></b></td>
+                <td colspan="3">
+                    <select name="semiOrphan" id="semiOrphan" class="form-control">
+                        <option>ஆம் / Yes</option>
+                        <option>இல்லை / No</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+        </div>
+
+        <h5 class="mt-5">குடும்ப நபர்கள் விபரம் / Family Members Details</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>பெயர் / Name<span>*</span></th>
+                    <th>தொழில் / Occupation<span>*</span></th>
+                    <th>ஆண்டு வருமானம் / Annual Income<span>*</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="fm1" id="fm1" placeholder=" Father / Guardian Name / தந்தை / காப்பாளர் பெயர்"></td>
+                    <td><input type="text" name="fm1-occupation" id="fm1-occupation"></td>
+                    <td><input type="text" name="fm1-income" id="fm1-income"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="fm2" id="fm2" placeholder="Mother / Guardian Name / தாய் / காப்பாளர் பெயர்"></td>
+                    <td><input type="text" name="fm2-occupation" id="fm2-occupation"></td>
+                    <td><input type="text" name="fm2-income" id="fm2-income"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h5 class="mt-4">உடன்பிறப்புகள் / Siblings</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>பெயர் / Name<span>*</span></th>
+                    <th>பள்ளி / கல்லூரி / School / College<span>*</span></th>
+                    <th>பயிலும் ஆண்டு / Pursuing Year<span>*</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><input type="text" name="s1" id="s1"></td><td><input type="text" name="s1-study" id="s1-study"></td><td><input type="text" name="s1-year" id="s1-year"></td></tr>
+                <tr><td><input type="text" name="s2" id="s2"></td><td><input type="text" name="s2-study" id="s2-study"></td><td><input type="text" name="s2-year" id="s2-year"></td></tr>
+                <tr><td><input type="text" name="s3" id="s3"></td><td><input type="text" name="s3-study" id="s3-study"></td><td><input type="text" name="s3-year" id="s3-year"></td></tr>
+            </tbody>
+        </table>
+
+        <h5 class="mt-4">பெற்றோர் நிரந்திர முகவரி / Parent's Address<span>*</span></h5>
+        <div class="mb-3">
+            <input type="text" class="form-control p-4" name="address" id="address">
+        </div>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label><b>மாவட்டம் / District<span>*</span></b></label>
+                <input type="text" class="form-control" name="district" id="district" required>
+            </div>
+            <div class="col-md-6">
+                <label><b>அலைபேசி / Phone no<span>*</span></b></label>
+                <input type="text" class="form-control" name="phoneNo" id="phoneNo">
+            </div>
+        </div>
+
+        <h5 class="mt-4">கல்வி கற்கும் விபரம் / Educational Details</h5>
+        <table class="table table-bordered">
+            <tbody>
+                <tr><td style="width: 30%;"><b>பள்ளி / கல்லூரி பெயர் / School / College name<span>*</span></b></td><td><input type="text" name="school-college" id="school-college"></td></tr>
+                <tr><td><b>முகவரி / Address<span>*</span></b></td><td><input class="form-control" name="school-college-address" id="school-college-address" required></td></tr>
+                <tr><td><b>பாடப்பிரிவு / Subject<span>*</span></b></td><td><input type="text" name="subject" id="subject"></td></tr>
+                <tr><td><b>மொத்த ஆண்டுகள் / Batch<span>*</span></b></td><td><input type="text" name="years" id="years"></td></tr>
+                <tr><td><b>தற்போதைய ஆண்டு / Current year batch<span>*</span></b></td><td><input type="text" name="current-year" id="current-year"></td></tr>
+            </tbody>
+        </table>
+
+            <div class="col-md-12 d-flex align-items-center justify-content-center">
+                    <label for="image" class="form-label fs-5 text-center w-100" id="image-label">Upload your Image<span>*</span></label>
+                    <input class="form-control mb-3" type="file" name="image" id="image" accept="image/*" required>
+            </div>
+
+        <div class="text-center mt-4 d-grid gap-3" style="grid-template-columns: 1fr 1fr; display: grid; max-width: 400px; margin: 0 auto;">
+            <button type="submit" id="submitBtn">Submit</button>
+            <button type="button" id="clearBtn">Clear</button>
+        </div>
+        </form>
+    </div>
+        <footer class="p-4">
+            <p class="text-center" style="color: #fff;">Copyright © St. Joseph's College 2025 . All right reserved. Created by JCICT-ERP TEAM</p>
+        </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
