@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php 
 session_start();
 include 'header.php'; 
@@ -116,60 +115,4 @@ include 'header.php';
     }
 </script>
 </body>
-=======
-<?php
-include 'header.php'
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirmation Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<div class="container mt-5">
-    <h2 class="mb-4 text-center">Confirmed Instrument Details</h2>
-
-    <?php
-    if (isset($_POST['selectedItems'])) {
-        $items = json_decode($_POST['selectedItems'], true);
-
-        if (!empty($items)) {
-            echo '<table class="table table-bordered table-striped">';
-            echo '<thead class="table-dark"><tr><th>#</th><th>Instrument</th><th>Count</th><th>Amount (₹)</th></tr></thead><tbody>';
-
-            $serial = 1;
-            $grandTotal = 0;
-
-            foreach ($items as $item) {
-                $instrument = htmlspecialchars($item['instrument']);
-                $count = htmlspecialchars($item['count']);
-                $amount = htmlspecialchars($item['amount']);
-                $grandTotal += $amount;
-
-                echo "<tr>
-                        <td>$serial</td>
-                        <td>$instrument</td>
-                        <td>$count</td>
-                        <td>₹$amount</td>
-                      </tr>";
-                $serial++;
-            }
-
-            echo "<tr class='fw-bold table-secondary'>
-                    <td colspan='3' class='text-end'>Total</td>
-                    <td>₹$grandTotal</td>
-                  </tr>";
-
-            echo '</tbody></table>';
-        } else {
-            echo "<p class='text-danger'>No items selected.</p>";
-        }
-    } else {
-        echo "<p class='text-danger'>No data received.</p>";
-    }
-    ?>
-</div>
-</body>
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
 </html>
