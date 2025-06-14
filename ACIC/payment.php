@@ -1,28 +1,18 @@
-<!-- payment.php -->
 <?php 
 session_start();
- 
 include 'header.php'; 
+
 $catg = $_SESSION['category'];
-<<<<<<< HEAD
 $mobno = $_SESSION['txt_src_mobile'] ?? $_SESSION['txtmobile'];
 $username = $_SESSION['username'];
-=======
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDMlFnUBR5ALVnUcyIKMSO8ceM0v9VhokODSoY_GbHj2LRLkuMQV0oqj7CQCOKYa6WXFM&usqp=CAU" type="image/x-icon">
     <title>Registration Form</title>
-
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDMlFnUBR5ALVnUcyIKMSO8ceM0v9VhokODSoY_GbHj2LRLkuMQV0oqj7CQCOKYa6WXFM&usqp=CAU" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <style>
         .hidden { display: none; }
         td { padding: 1% 2%; vertical-align: middle; }
@@ -40,58 +30,50 @@ $username = $_SESSION['username'];
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-<<<<<<< HEAD
-=======
-        <div class="name"></div>
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
-        <div class="container">
-            <p class="h3">
-                The Following tariff will be followed for the usages of instruments at the instrumentation center (ACIC) for the scholars from St. Joseph's College and other colleges with effect from 01-01-2023
-            </p>
+<div class="container-fluid">
+    <div class="container">
+        <p class="h3">
+            The Following tariff will be followed for the usages of instruments at the instrumentation center (ACIC) for the scholars from St. Joseph's College and other colleges with effect from 01-01-2023
+        </p>
+    </div>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-end align-items-center gap-3">
+            <h3 class="border p-3 rounded-3 bg-primary fs-4 text-white">Name: <?php echo htmlspecialchars($username); ?></h3>
+            <h3 class="border p-3 rounded-3 bg-success fs-4 text-white">Mobile: <?php echo htmlspecialchars($mobno); ?></h3>
         </div>
 
-        <div class="container mt-5">
-<<<<<<< HEAD
-            <div class="d-flex justify-content-end align-items-center gap-3">
-                <h3 class="border p-3 rounded-3 bg-primary fs-4">Name: <?php echo htmlspecialchars($username); ?></h3>
-                <h3 class="border p-3 rounded-3 bg-success text-light fs-4">Mobile: <?php echo htmlspecialchars($mobno); ?></h3>
-            </div>
-            <form id="submitForm" method="POST">
+        <form id="submitForm" method="POST">
             <!-- SJC table -->
-=======
-            <!-- SJC table -->
-             <form id="submitForm" method="POST">
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
             <table class="border bordered <?php echo $catg == 'SJC' ? '' : 'hidden'; ?>">
                 <thead>
                     <tr><td class="h4" colspan="3">St. Joseph’s College Student/Staff/Scholar (Per sample)</td></tr>
                 </thead>
                 <tbody style="font-size: 12px;">
-                    <?php
-                    $instruments = [
-                        ["FTIR", 75],
-                        ["UV-Visible", 75],
-                        ["Mht", 75],
-                        ["Ia-Cv", 200],
-                        ["lcrz", 75],
-                        ["HPLC", 500],
-                        ["Preparative", 750],
-                        ["Fluorescence-spectrometer", 75],
-                        ["SEM", 400],
-                        ["particle-size-Analyzer", 100]
-                    ];
-                    $i = 1;
-                    foreach ($instruments as $instrument) {
-                        echo "<tr>
-                            <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                            <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)'></td>
-                            <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
-                        </tr>";
-                        $i++;
-                    }
-                    ?>
-                    <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
+                <?php
+                $instruments = [
+                    ["FTIR", 75],
+                    ["UV-Visible", 75],
+                    ["Mht", 75],
+                    ["Ia-Cv", 200],
+                    ["lcrz", 75],
+                    ["HPLC", 500],
+                    ["Preparative", 750],
+                    ["Fluorescence-spectrometer", 75],
+                    ["SEM", 400],
+                    ["particle-size-Analyzer", 100]
+                ];
+                $i = 1;
+                foreach ($instruments as $instrument) {
+                    echo "<tr>
+                        <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
+                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
+                    </tr>";
+                    $i++;
+                }
+                ?>
+                <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
                 </tbody>
             </table>
 
@@ -101,41 +83,36 @@ $username = $_SESSION['username'];
                     <tr><td class="h4" colspan="3">Outside College Student/Staff/Scholar (Per sample)</td></tr>
                 </thead>
                 <tbody style="font-size: 12px;">
-                    <?php
-                    $outsideInstruments = [
-                        ["FTIR", 100],
-                        ["UV-Visible", 100],
-                        ["Mht", 100],
-                        ["Ia-Cv", 300],
-                        ["lcrz", 100],
-                        ["HPLC", 700],
-                        ["Preparative", 1000],
-                        ["Fluorescence-spectrometer", 100],
-                        ["SEM", 600],
-                        ["particle-size-Analyzer", 150]
-                    ];
-                    $i = 1;
-                    foreach ($outsideInstruments as $instrument) {
-                        echo "<tr>
-                            <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                            <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)'></td>
-                            <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
-                        </tr>";
-                        $i++;
-                    }
-                    ?>
-<<<<<<< HEAD
-                    <tr ><td colspan="3"><button class="btn btn-success fs-5 p-3 w-100" name="total">Total</button></td></tr>
-=======
-                    <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
+                <?php
+                $outsideInstruments = [
+                    ["FTIR", 100],
+                    ["UV-Visible", 100],
+                    ["Mht", 100],
+                    ["Ia-Cv", 300],
+                    ["lcrz", 100],
+                    ["HPLC", 700],
+                    ["Preparative", 1000],
+                    ["Fluorescence-spectrometer", 100],
+                    ["SEM", 600],
+                    ["particle-size-Analyzer", 150]
+                ];
+                $i = 1;
+                foreach ($outsideInstruments as $instrument) {
+                    echo "<tr>
+                        <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
+                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
+                    </tr>";
+                    $i++;
+                }
+                ?>
+                <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
                 </tbody>
             </table>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 
-<<<<<<< HEAD
 <script>
 const ratesSJC = {
     "FTIR-count": 75,
@@ -186,8 +163,8 @@ function calculateTotal() {
         total += parseInt(input.value) || 0;
     });
 
-    if(total === 0){
-        alert("You're not selected any item");
+    if (total === 0) {
+        alert("You haven't selected any item.");
         return;
     }
 
@@ -234,8 +211,6 @@ function calculateTotal() {
 
             document.body.appendChild(form);
             form.submit();
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = 'payment.php';
         }
     });
 }
@@ -262,122 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
         calculateTotal();
     }));
 });
-=======
-    <script>
-    const ratesSJC = {
-        "FTIR-count": 75,
-        "UV-Visible-count": 75,
-        "Mht-count": 75,
-        "Ia-Cv-count": 200,
-        "lcrz-count": 75,
-        "HPLC-count": 500,
-        "Preparative-count": 750,
-        "Fluorescence-spectrometer-count": 75,
-        "SEM-count": 400,
-        "particle-size-Analyzer-count": 100
-    };
-
-    const ratesOutside = {
-        "FTIR-count": 100,
-        "UV-Visible-count": 100,
-        "Mht-count": 100,
-        "Ia-Cv-count": 300,
-        "lcrz-count": 100,
-        "HPLC-count": 700,
-        "Preparative-count": 1000,
-        "Fluorescence-spectrometer-count": 100,
-        "SEM-count": 600,
-        "particle-size-Analyzer-count": 150
-    };
-
-    function calculateAmount(input) {
-        const name = input.name;
-        const count = parseInt(input.value) || 0;
-        const visibleTable = document.querySelector("table:not(.hidden)");
-        const isSJC = visibleTable.textContent.includes("St. Joseph’s College");
-        const rates = isSJC ? ratesSJC : ratesOutside;
-
-        if (name in rates) {
-            const price = rates[name];
-            const row = input.closest("tr");
-            const amountInput = row.querySelector('input[name^="amount"]');
-            amountInput.value = count * price;
-        }
-    }
-
-    function calculateTotal() {
-        let total = 0;
-        const visibleTable = document.querySelector("table:not(.hidden)");
-        const amountInputs = visibleTable.querySelectorAll('input[name^="amount"]');
-        amountInputs.forEach(input => {
-            total += parseInt(input.value) || 0;
-        });
-        
-        Swal.fire({
-            title: 'Total Amount',
-            text: '₹' + total,
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Continue',
-            cancelButtonText: 'Cancel',
-            reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                // Collect selected data
-                    const checkedRows = Array.from(document.querySelectorAll('input[type="checkbox"]        :checked')).map(checkbox => {
-                    const row = checkbox.closest("tr");
-                    const instrument = row.querySelector("td:nth-child(2)").innerText.trim();
-                    const count = parseInt(row.querySelector('input[name$="-count"]').value) || 0;
-                    const amount = parseInt(row.querySelector('input[name^="amount"]').value) || 0;
-
-                        return { instrument, count, amount };
-                    }
-                );
-
-        // Create a form to POST the data
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'confirmation.php';
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'selectedItems';
-        input.value = JSON.stringify(checkedRows);
-
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = 'payment.php';
-    }
-});
-    }
-
-    function toggleRowInputs(checkbox) {
-        const row = checkbox.closest("tr");
-        const inputs = row.querySelectorAll("input[type='number']");
-        inputs.forEach(input => {
-            input.disabled = !checkbox.checked;
-            if (!checkbox.checked) input.value = "";
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // Attach checkbox toggle behavior
-        const checkboxes = document.querySelectorAll("input[type='checkbox']");
-        checkboxes.forEach(checkbox => {
-            toggleRowInputs(checkbox); // Initial state based on default checked/unchecked
-            checkbox.addEventListener("change", () => toggleRowInputs(checkbox));
-        });
-
-        // Total button
-        const totalButtons = document.querySelectorAll('button[name="total"]');
-        totalButtons.forEach(btn => btn.addEventListener("click", (e)=>{
-            e.preventDefault();
-            calculateTotal();
-        }));
-    });
->>>>>>> ae071bb5bf2ae6a78c78c9e213496f9466f325a9
 </script>
 </body>
 </html>
