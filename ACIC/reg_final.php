@@ -1,4 +1,4 @@
-<!-- reg_final.php -->
+<!-- reg_final.php // registration logic -->
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
@@ -62,7 +62,7 @@ if (isset($_POST['submit_reg'])) {
 
         if (mysqli_query($con, $query)) {
             $_SESSION['category'] = $category;
-            $_SESSION['txtmobile'] = $mobile;
+            $_SESSION['txt_src_mobile'] = $mobile;
             $_SESSION['username'] = $name;
             echo "<script>
                 setTimeout(function() {
