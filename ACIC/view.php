@@ -1,3 +1,4 @@
+<!-- index.php -->
 <?php 
 session_start();
 if (!isset($_SESSION['mobno'])) {
@@ -77,7 +78,7 @@ include 'header.php';
         $total = htmlspecialchars($_POST['total']);
         $datetime = date('YmdHis');
 
-        $conn = new mysqli("localhost", "root", "", "ACIC_instruments");
+        $conn = new mysqli("localhost", "root", "", "college");
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
