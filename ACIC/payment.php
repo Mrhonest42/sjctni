@@ -1,9 +1,10 @@
+<!-- payment.php -->
 <?php 
 session_start();
 include 'header.php'; 
 
 $catg = $_SESSION['category'];
-$mobno = $_SESSION['txt_src_mobile'] ?? $_SESSION['txtmobile'];
+$mobno = $_SESSION['txt_src_mobile'];
 $username = $_SESSION['username'];
 ?>
 <!DOCTYPE html>
