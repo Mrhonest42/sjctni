@@ -12,6 +12,7 @@ $username = $_SESSION['username'];
 <head>
     <title>Registration Form</title>
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDMlFnUBR5ALVnUcyIKMSO8ceM0v9VhokODSoY_GbHj2LRLkuMQV0oqj7CQCOKYa6WXFM&usqp=CAU" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -28,6 +29,7 @@ $username = $_SESSION['username'];
         td input[type="checkbox"] {
             margin-right: 6px;
         }
+        
     </style>
 </head>
 <body>
@@ -39,9 +41,11 @@ $username = $_SESSION['username'];
     </div>
 
     <div class="container mt-5">
-        <div class="d-flex justify-content-end align-items-center gap-3">
-            <h3 class="border p-3 rounded-3 bg-primary fs-4 text-white">Name: <?php echo htmlspecialchars($username); ?></h3>
-            <h3 class="border p-3 rounded-3 bg-success fs-4 text-white">Mobile: <?php echo htmlspecialchars($mobno); ?></h3>
+        <div class="d-flex justify-content-end align-items-center gap-3 my-3">
+            <button class="border p-3 rounded-3 btn-secondary fs-4 text-white" onclick=>Purchase History</button>
+            <button class="border p-3 rounded-3 btn-primary fs-4 text-white">user name: <?php echo htmlspecialchars($username); ?></button>
+            <button class="border p-3 rounded-3 btn-success fs-4 text-white">mobile: <?php echo htmlspecialchars($mobno); ?></button>
+            <button class="border p-3 rounded-3 btn-danger fs-4 text-white" onclick="logout()" id="logoutBtn">Logout</button>
         </div>
 
         <form id="submitForm" method="POST">
@@ -68,13 +72,13 @@ $username = $_SESSION['username'];
                 foreach ($instruments as $instrument) {
                     echo "<tr>
                         <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' class='count' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
                         <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
                     </tr>";
                     $i++;
                 }
                 ?>
-                <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
+                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Process</button></td></tr>
                 </tbody>
             </table>
 
@@ -101,14 +105,13 @@ $username = $_SESSION['username'];
                 foreach ($outsideInstruments as $instrument) {
                     echo "<tr>
                         <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' class='count' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
                         <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
                     </tr>";
                     $i++;
                 }
                 ?>
-                <tr><td colspan="3"><button class="btn btn-success fs-5 p-3 w-25" name="total">Total</button></td></tr>
-                </tbody>
+                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Process</button></td></tr>
             </table>
         </form>
     </div>
@@ -169,61 +172,57 @@ function calculateTotal() {
         return;
     }
 
-    Swal.fire({
-        title: 'Total Amount',
-        text: '₹' + total,
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Continue',
-        cancelButtonText: 'Cancel',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const checkedRows = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => {
-                const row = checkbox.closest("tr");
-                const instrument = row.querySelector("td:first-child label").innerText.split(" ₹")[0].trim();
-                const count = parseInt(row.querySelector('input[name$="-count"]').value) || 0;
-                const amount = parseInt(row.querySelector('input[name^="amount"]').value) || 0;
+    const checkedRows = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => {
+        const row = checkbox.closest("tr");
+        const instrument = row.querySelector("td:first-child label").innerText.split(" ₹")[0].trim();
+        const count = parseInt(row.querySelector('input[name$="-count"]').value) || 0;
+        const amount = parseInt(row.querySelector('input[name^="amount"]').value) || 0;
 
-                return { instrument, count, amount };
-            });
-
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'confirmation.php';
-
-            const itemsInput = document.createElement('input');
-            itemsInput.type = 'hidden';
-            itemsInput.name = 'selectedItems';
-            itemsInput.value = JSON.stringify(checkedRows);
-            form.appendChild(itemsInput);
-
-            const usernameInput = document.createElement('input');
-            usernameInput.type = 'hidden';
-            usernameInput.name = 'username';
-            usernameInput.value = <?php echo json_encode($username); ?>;
-            form.appendChild(usernameInput);
-
-            const mobnoInput = document.createElement('input');
-            mobnoInput.type = 'hidden';
-            mobnoInput.name = 'mobno';
-            mobnoInput.value = <?php echo json_encode($mobno); ?>;
-            form.appendChild(mobnoInput);
-
-            document.body.appendChild(form);
-            form.submit();
-        }
+        return { instrument, count, amount };
     });
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'confirmation.php';
+
+    const itemsInput = document.createElement('input');
+    itemsInput.type = 'hidden';
+    itemsInput.name = 'selectedItems';
+    itemsInput.value = JSON.stringify(checkedRows);
+    form.appendChild(itemsInput);
+
+    const usernameInput = document.createElement('input');
+    usernameInput.type = 'hidden';
+    usernameInput.name = 'username';
+    usernameInput.value = <?php echo json_encode($username); ?>;
+    form.appendChild(usernameInput);
+
+    const mobnoInput = document.createElement('input');
+    mobnoInput.type = 'hidden';
+    mobnoInput.name = 'mobno';
+    mobnoInput.value = <?php echo json_encode($mobno); ?>;
+    form.appendChild(mobnoInput);
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 function toggleRowInputs(checkbox) {
     const row = checkbox.closest("tr");
     const inputs = row.querySelectorAll("input[type='number']");
-    inputs.forEach(input => {
-        input.disabled = !checkbox.checked;
-        if (!checkbox.checked) input.value = "";
-    });
+    
+    // Only enable/disable the second input (count), not the third (amount)
+    const countInput = inputs[0];  // second column
+    const amountInput = inputs[1]; // third column
+
+    countInput.disabled = !checkbox.checked;
+
+    if (!checkbox.checked) {
+        countInput.value = "";
+        amountInput.value = ""; // clear amount when unchecking
+    }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const checkboxes = document.querySelectorAll("input[type='checkbox']");
@@ -238,6 +237,13 @@ document.addEventListener("DOMContentLoaded", function () {
         calculateTotal();
     }));
 });
+
+function logout(){
+    document.getElementById("logoutBtn").addEventListener('click', (e)=> {
+        e.preventDefault();
+        window.location.href = 'index.php';
+    })
+}
 </script>
 </body>
 </html>
