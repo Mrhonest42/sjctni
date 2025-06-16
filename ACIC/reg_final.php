@@ -64,17 +64,10 @@ if (isset($_POST['submit_reg'])) {
             $_SESSION['category'] = $category;
             $_SESSION['txt_src_mobile'] = $mobile;
             $_SESSION['username'] = $name;
-            echo "<script>
-                setTimeout(function() {
-                    swal({
-                        title: 'Success!',
-                        text: 'Registration completed successfully.',
-                        type: 'success'
-                    }, function() {
-                        window.location = 'payment.php';
-                    });
-                }, 100);
-            </script>";
+            
+            //Changes made here
+            header("Location: payment.php");
+            exit();
         } else {
             echo "<script>
                 setTimeout(function() {
