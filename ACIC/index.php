@@ -65,19 +65,19 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="mobile" style="color: #a52a2a;"><span class="req">* </span> WhatsApp Mobile No:</label> 
-				<input class="form-control" type="text" name="txt_src_mobile" id = "mobile" minlength="10" maxlength="10" onkeyup = "validatephone(this)" required />  
+				<input class="form-control fs-5" type="text" name="txt_src_mobile" id = "mobile" minlength="10" maxlength="10" onkeyup = "validatephone(this)" required />  
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="mobile" style="color: #a52a2a;"><span class="req">* </span> Email:</label> 
-				<input type="email" class="form-control" name="txt_src_emailid" id="emailid" placeholder="joseph@gmail.com" onkeyup = "email_validate(this)" required />
+				<input type="email" class="form-control fs-5" name="txt_src_emailid" id="emailid" placeholder="joseph@gmail.com" onkeyup = "email_validate(this)" required />
 				<span id="status" class="confirmMessage"></span>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group" style="text-align: center;">
-				<br><input class="btn btn-primary w-25 p-3" style="font-weight: 600;" type="submit" name="sub_reg_check" onclick="valid1();" value="Check & To Pay" />
+				<br><input class="btn btn-primary w-25 p-3 fs-5" style="font-weight: 600;width: 10%;" type="submit" name="sub_reg_check" onclick="valid1();" value="Check & To Pay" />
 			</div>
 		</div>
 	</div>
@@ -100,42 +100,42 @@
         <div class="row">
             <div class="col-md-4 form-group">
                 <label>Full Name <span class="req">*</span></label>
-                <input type="text" name="txtfirstname" class="form-control" maxlength="80" required onkeyup="validateAlphaOnly(this)">
+                <input type="text" name="txtfirstname" class="form-control fs-5" maxlength="80" required onkeyup="validateAlphaOnly(this)">
             </div>
 
             <div class="col-md-4 form-group">
                 <label>Department <span class="req">*</span></label>
-                <input type="text" name="txtdepartmentname" class="form-control" maxlength="80" required onkeyup="validateAlphaOnly(this)">
+                <input type="text" name="txtdepartmentname" class="form-control fs-5" maxlength="80" required onkeyup="validateAlphaOnly(this)">
             </div>
 
             <div class="col-md-4 form-group">
                 <label>Institution / University <span class="req">*</span></label>
-                <input type="text" name="txtcollegename" class="form-control" maxlength="80" required onkeyup="validateAlphaOnly(this)">
+                <input type="text" name="txtcollegename" class="form-control fs-5" maxlength="80" required onkeyup="validateAlphaOnly(this)">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-4 form-group">
                 <label>Email <span class="req">*</span></label>
-                <input type="email" name="emailid" id="emailid" class="form-control" required onkeyup="validateEmail(this)">
+                <input type="email" name="emailid" id="emailid" class="form-control fs-5" required onkeyup="validateEmail(this)">
                 <span id="status"></span>
             </div>
 
             <div class="col-md-4 form-group">
                 <label>Phone No <span class="req">*</span></label>
-                <input type="text" name="txtmobile" id="txtmobile" class="form-control" maxlength="10" minlength="10" required oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                <input type="text" name="txtmobile" id="txtmobile" class="form-control fs-5" maxlength="10" minlength="10" required oninput="this.value=this.value.replace(/[^0-9]/g,'')">
             </div>
 
             <div class="col-md-4 form-group">
                 <label>Purpose <span class="req">*</span></label>
-                <input type="text" name="txtpurpose" class="form-control" required>
+                <input type="text" name="txtpurpose" class="form-control fs-5" required>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-4 form-group">
                 <label>Category <span class="req">*</span></label>
-                <select name="category" class="form-control" required>
+                <select name="category" class="form-control fs-5" required>
                     <option value="SJC">SJC</option>
                     <option value="Outside SJC">Outside SJC</option>
                 </select>
@@ -143,7 +143,7 @@
         </div>
 
         <div class="form-group text-end">
-            <button type="submit" name="submit_reg" class="btn btn-primary p-3" style="width: 10%; font-size: 14px;">Register</button>
+            <button type="submit" name="submit_reg" class="btn btn-primary p-3 fs-5" style="width: 10%; font-size: 14px;">Register</button>
         </div>
     </div>
 </form>
