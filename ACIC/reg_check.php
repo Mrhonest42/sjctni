@@ -32,18 +32,9 @@ if (isset($_POST['sub_reg_check'])) {
             $_SESSION['category'] = $row['category'];
             $_SESSION['txt_src_mobile'] = $row['mobile_number'];
             $_SESSION['username'] = $row['name'];
-
-            echo "<script>
-                setTimeout(function() {
-                    swal({
-                        title: 'Login Success!',
-                        text: 'Redirecting to payment...',
-                        type: 'success'
-                    }, function() {
-                        window.location = 'payment.php';
-                    });
-                }, 100);
-            </script>";
+            //Changes made here
+            header("Location: payment.php");
+            exit();
         } else {
             echo "<script>
                 setTimeout(function() {
