@@ -19,8 +19,9 @@ include 'header.php';
     $items = [];
 
     echo '<div class="d-flex justify-content-end align-items-center gap-3">
-        <h3 class="border p-3 rounded-3 bg-primary fs-4">Name: ' . htmlspecialchars($username) . '</h3>
-        <h3 class="border p-3 rounded-3 bg-success text-light fs-4">Mobile: ' . htmlspecialchars($mobno) . '</h3>
+        <button class="border p-3 rounded-3 btn-primary fs-4">Name: ' . htmlspecialchars($username) . '</button>
+        <button class="border p-3 rounded-3 btn-success text-light fs-4">Mobile: ' . htmlspecialchars($mobno) . '</button>
+        <button class="border p-3 rounded-3 btn-danger fs-4 text-white" onclick="logout()" id="logoutBtn">Logout</button>
     </div>';
 
     if (isset($_POST['selectedItems'])) {
@@ -55,7 +56,7 @@ include 'header.php';
             echo '</tbody></table>';
             echo "<div class='d-flex justify-content-between'>
                     <button class='btn btn-primary fs-4' onclick='goBack()'><span class='fs-3 fw-bold'>&lt;</span> Back</button> 
-                    <button class='btn btn-success fs-4 px-3 py-2' onclick='proceed()'>Proceed <span class='fs-3 fw-bold'>&gt;</span></button>
+                    <button class='btn btn-success fs-4 px-3 py-2' onclick='proceed()'>Pay <span class='fs-3 fw-bold'>&gt;</span></button>
                   </div>";
         } else {
             echo "<p class='text-danger'>No items selected.</p>";
@@ -112,6 +113,12 @@ include 'header.php';
         document.getElementById('totalAmountInput').value = total;
 
         document.getElementById('viewForm').submit();
+    }
+    function logout(){
+        document.getElementById("logoutBtn").addEventListener('click', (e)=> {
+            e.preventDefault();
+            window.location.href = 'index.php';
+    })
     }
 </script>
 </body>
