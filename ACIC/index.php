@@ -64,20 +64,20 @@
 	<div class="row" style="padding-top: 10px;">
 		<div class="col-md-4">
 			<div class="form-group">
-				<label for="mobile" style="color: #a52a2a;"><span class="req">* </span> WhatsApp Mobile No:</label> 
+				<label for="mobile" style="color: #a52a2a;"><span class="req fs-5">* </span> WhatsApp Mobile No:</label> 
 				<input class="form-control fs-5" type="text" name="txt_src_mobile" id = "mobile" minlength="10" maxlength="10" onkeyup = "validatephone(this)" required />  
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
-				<label for="mobile" style="color: #a52a2a;"><span class="req">* </span> Email:</label> 
-				<input type="email" class="form-control fs-5" name="txt_src_emailid" id="emailid" placeholder="joseph@gmail.com" onkeyup = "email_validate(this)" required />
-				<span id="status" class="confirmMessage"></span>
+				<label for="mobile" style="color: #a52a2a;"><span class="req fs-5">* </span> Email:</label> 
+				<input type="email" class="form-control fs-5" name="txt_src_emailid" id="emailid" placeholder="joseph@gmail.com" onkeyup = "validateEmail(this)" required />
+				<span id="status" class="confirmMessage fs-5"></span>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group" style="text-align: center;">
-				<br><input class="btn btn-primary w-25 p-3 fs-5" style="font-weight: 600;width: 10%;" type="submit" name="sub_reg_check" onclick="valid1();" value="Check & To Pay" />
+				<br><input class="btn btn-primary w-25 p-3" style="font-weight: 600;" type="submit" name="sub_reg_check" onclick="valid1();" value="Check & To Pay" />
 			</div>
 		</div>
 	</div>
