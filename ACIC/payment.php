@@ -4,7 +4,7 @@ session_start();
 include 'header.php'; 
 
 $catg = $_SESSION['category'];
-$mobno = $_SESSION['txt_src_mobile'];
+$mobno = $_SESSION['txt_src_mobile']; // <- consistent key
 $username = $_SESSION['username'];
 ?>
 <!DOCTYPE html>
@@ -12,9 +12,9 @@ $username = $_SESSION['username'];
 <head>
     <title>Registration Form</title>
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDMlFnUBR5ALVnUcyIKMSO8ceM0v9VhokODSoY_GbHj2LRLkuMQV0oqj7CQCOKYa6WXFM&usqp=CAU" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/logout.js"></script>
     <style>
         .hidden { display: none; }
         td { padding: 1% 2%; vertical-align: middle; }
@@ -29,7 +29,6 @@ $username = $_SESSION['username'];
         td input[type="checkbox"] {
             margin-right: 6px;
         }
-        
     </style>
 </head>
 <body>
@@ -41,21 +40,24 @@ $username = $_SESSION['username'];
     </div>
 
     <div class="container mt-5">
-        <div class="d-flex justify-content-end align-items-center gap-3 my-3">
-            <button class="border p-3 rounded-3 btn-secondary fs-4 text-white" onclick=>Purchase History</button>
-            <button class="border p-3 rounded-3 btn-primary fs-4 text-white">user name: <?php echo htmlspecialchars($username); ?></button>
-            <button class="border p-3 rounded-3 btn-success fs-4 text-white">mobile: <?php echo htmlspecialchars($mobno); ?></button>
-            <button class="border p-3 rounded-3 btn-danger fs-4 text-white" onclick="logout()" id="logoutBtn">Logout</button>
+        <div class="d-flex justify-content-end align-items-center gap-3">
+            <button class="border p-3 rounded-3 btn-secondary fs-4 text-white" onclick="visitHistory()">Purchase History</button>
+            <button class="border p-3 rounded-3 btn-primary fs-4 text-white">Name: <?php echo htmlspecialchars($username); ?></button>
+            <button class="border p-3 rounded-3 btn-success fs-4 text-white">Mobile: <?php echo htmlspecialchars($mobno); ?></button>
+            <button class="border p-3 rounded-3 btn-danger fs-4 text-white" onclick="logout()">Logout</button>
         </div>
 
         <form id="submitForm" method="POST">
             <!-- SJC table -->
+            <!-- Check the user whether SJC or Outside. If outside, then class hidden will apply and then hide it to the user -->
             <table class="border bordered <?php echo $catg == 'SJC' ? '' : 'hidden'; ?>">
                 <thead>
                     <tr><td class="h4" colspan="3">St. Joseph’s College Student/Staff/Scholar (Per sample)</td></tr>
                 </thead>
                 <tbody style="font-size: 12px;">
                 <?php
+
+                //Creating Array to display items as a table
                 $instruments = [
                     ["FTIR", 75],
                     ["UV-Visible", 75],
@@ -68,21 +70,26 @@ $username = $_SESSION['username'];
                     ["SEM", 400],
                     ["particle-size-Analyzer", 100]
                 ];
+
+                //Initializing with 1
                 $i = 1;
+
+                //Creating table row for each item
                 foreach ($instruments as $instrument) {
                     echo "<tr>
                         <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                        <td class='border bordered'><input type='number' class='count' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
                         <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
                     </tr>";
                     $i++;
                 }
                 ?>
-                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Process</button></td></tr>
+                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Proceed</button></td></tr>
                 </tbody>
             </table>
 
             <!-- Outside SJC table -->
+             <!-- Check the user whether SJC or Outside. If SJC, then class hidden will apply and then hide it to the user -->
             <table class="border bordered <?php echo $catg == 'Outside SJC' ? '' : 'hidden'; ?>">
                 <thead>
                     <tr><td class="h4" colspan="3">Outside College Student/Staff/Scholar (Per sample)</td></tr>
@@ -105,13 +112,14 @@ $username = $_SESSION['username'];
                 foreach ($outsideInstruments as $instrument) {
                     echo "<tr>
                         <td class='border bordered'><label><input type='checkbox' name='{$instrument[0]}'> {$instrument[0]} ₹{$instrument[1]}/-</label></td>
-                        <td class='border bordered'><input type='number' class='count' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
+                        <td class='border bordered'><input type='number' name='{$instrument[0]}-count' onchange='calculateAmount(this)' disabled></td>
                         <td class='border bordered'><input type='number' name='amount{$i}' disabled></td>
                     </tr>";
                     $i++;
                 }
                 ?>
-                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Process</button></td></tr>
+                <tr><td colspan="3" class="text-end"><button class="btn btn-success fs-5 p-3 w-25" name="total">Proceed</button></td></tr>
+                </tbody>
             </table>
         </form>
     </div>
@@ -147,28 +155,33 @@ const ratesOutside = {
 function calculateAmount(input) {
     const name = input.name;
     const count = parseInt(input.value) || 0;
-    const visibleTable = document.querySelector("table:not(.hidden)");
+    const visibleTable = document.querySelector("table:not(.hidden)"); 
+    // Avoid getting hidden tables
     const isSJC = visibleTable.textContent.includes("St. Joseph’s College");
     const rates = isSJC ? ratesSJC : ratesOutside;
 
     if (name in rates) {
         const price = rates[name];
         const row = input.closest("tr");
+        //Seleting closeset ancestor of input
         const amountInput = row.querySelector('input[name^="amount"]');
+        //Seleting an input element which has name attribute that starts with 'amount'
         amountInput.value = count * price;
     }
 }
 
 function calculateTotal() {
     let total = 0;
-    const visibleTable = document.querySelector("table:not(.hidden)");
-    const amountInputs = visibleTable.querySelectorAll('input[name^="amount"]');
+    const visibleTable = document.querySelector("table:not(.hidden)");//Selecting the visible table
+    const amountInputs = visibleTable.querySelectorAll('input[name^="amount"]'); //Selecting all the input elements having name sttribute which starts with 'amount'
     amountInputs.forEach(input => {
         total += parseInt(input.value) || 0;
+        //For all the input values converted to int and added to total
     });
 
     if (total === 0) {
         alert("You haven't selected any item.");
+        //Preventing the user entering to confirmation page without buying anything
         return;
     }
 
@@ -238,12 +251,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }));
 });
 
-function logout(){
-    document.getElementById("logoutBtn").addEventListener('click', (e)=> {
-        e.preventDefault();
-        window.location.href = 'index.php';
-    })
-}
+    function visitHistory() {
+        const mobno = <?= json_encode($mobno) ?>;
+        window.location.href = `view.php?mobno=${encodeURIComponent(mobno)}`;
+    }
 </script>
+<script src="./js/visitHistory.js"></script>
 </body>
 </html>
