@@ -1,6 +1,65 @@
+<!-- confirmation.php -->
 <?php 
 session_start();
 include 'header.php'; 
+
+// Handle Pay button POST
+if (isset($_POST['finalPay'])) {
+    $mobno = $_SESSION['mobno'];
+    $items = json_decode($_POST['selectedItems'], true);
+    $total = $_POST['totalAmount'];
+
+    $instruments = [];
+    $counts = [];
+    $amounts = [];
+
+    foreach ($items as $item) {
+        $instruments[] = addslashes($item['instrument']);
+        $counts[] = addslashes($item['count']);
+        $amounts[] = addslashes($item['amount']);
+    }
+
+    $purchase_id = "acic" . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+    $instruments_str = implode(', ', $instruments);
+    $counts_str = implode(', ', $counts);
+    $amounts_str = implode(', ', $amounts);
+    $datetime = date('YmdHis');
+
+    $conn = new mysqli("localhost", "root", "", "college");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare("INSERT INTO instruments (purchase_id, mobile, instruments, quantity, amounts, total, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $purchase_id, $mobno, $instruments_str, $counts_str, $amounts_str, $total, $datetime);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+    echo "<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful!',
+        html: `<strong>Purchase ID:</strong> $purchase_id<br>
+               <strong>Mobile:</strong> $mobno<br>
+               <strong>Items:</strong> $instruments_str<br>
+               <strong>Total:</strong> ₹$total`,
+        showDenyButton: true,
+        confirmButtonText: 'Done',
+        denyButtonText: 'Purchase History',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'index.php';
+        } else if (result.isDenied) {
+            window.location.href = 'view.php';
+        }
+    });
+    </script>";
+
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +77,8 @@ include 'header.php';
     $grandTotal = 0;
     $items = [];
 
-    echo '<div class="d-flex justify-content-end align-items-center gap-3">
+    echo '<div class="d-flex justify-content-end align-items-center gap-3 mb-5">
+        <button class="border p-3 rounded-3 btn-secondary fs-4 text-white" onclick="visitHistory()">Purchase History</button>
         <button class="border p-3 rounded-3 btn-primary fs-4">Name: ' . htmlspecialchars($username) . '</button>
         <button class="border p-3 rounded-3 btn-success text-light fs-4">Mobile: ' . htmlspecialchars($mobno) . '</button>
         <button class="border p-3 rounded-3 btn-danger fs-4 text-white" onclick="logout()" id="logoutBtn">Logout</button>
@@ -55,8 +115,8 @@ include 'header.php';
 
             echo '</tbody></table>';
             echo "<div class='d-flex justify-content-between'>
-                    <button class='btn btn-primary fs-4' onclick='goBack()'><span class='fs-3 fw-bold'>&lt;</span> Back</button> 
-                    <button class='btn btn-success fs-4 px-3 py-2' onclick='proceed()'>Pay <span class='fs-3 fw-bold'>&gt;</span></button>
+                    <button class='btn btn-primary fs-4 w-25 py-2' onclick='goBack()'><span class='fs-3 fw-bold'>&lt;</span> Back</button> 
+                    <button class='btn btn-success fs-4 py-2 w-25' onclick='proceed()'>Pay</button>
                   </div>";
         } else {
             echo "<p class='text-danger'>No items selected.</p>";
@@ -67,8 +127,9 @@ include 'header.php';
     ?>
 </div>
 
-<!-- Hidden form to submit to view.php -->
-<form id="viewForm" method="POST" action="view.php" style="display: none;">
+<!-- Final Pay Form (hidden, POST to same page) -->
+<form id="payForm" method="POST" action="confirmation.php" style="display: none;">
+    <input type="hidden" name="finalPay" value="1">
     <input type="hidden" name="selectedItems" id="selectedItemsInput">
     <input type="hidden" name="totalAmount" id="totalAmountInput">
 </form>
@@ -76,6 +137,32 @@ include 'header.php';
 <script>
     let total = <?= $grandTotal ?>;
     const selectedItems = <?= json_encode($items) ?>;
+
+    function visitHistory() {
+        const mobno = <?= json_encode($mobno) ?>;
+        window.location.href = `view.php?mobno=${encodeURIComponent(mobno)}`;
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+
+    function logout(){
+        window.location.href = 'index.php';
+    }
+
+    function proceed() {
+        const checkedIndices = Array.from(document.querySelectorAll('.toggle-check'))
+            .map((el, i) => el.checked ? i : null)
+            .filter(i => i !== null);
+
+        const filteredItems = selectedItems.filter((_, i) => checkedIndices.includes(i));
+
+        document.getElementById('selectedItemsInput').value = JSON.stringify(filteredItems);
+        document.getElementById('totalAmountInput').value = total;
+
+        document.getElementById('payForm').submit();
+    }
 
     document.querySelectorAll('.toggle-check').forEach(checkbox => {
         checkbox.addEventListener('change', function () {
@@ -97,29 +184,6 @@ include 'header.php';
             document.getElementById('total-cell').innerText = '₹' + total;
         });
     });
-
-    function goBack() {
-        window.history.back();
-    }
-
-    function proceed() {
-        const checkedIndices = Array.from(document.querySelectorAll('.toggle-check'))
-            .map((el, i) => el.checked ? i : null)
-            .filter(i => i !== null);
-
-        const filteredItems = selectedItems.filter((_, i) => checkedIndices.includes(i));
-
-        document.getElementById('selectedItemsInput').value = JSON.stringify(filteredItems);
-        document.getElementById('totalAmountInput').value = total;
-
-        document.getElementById('viewForm').submit();
-    }
-    function logout(){
-        document.getElementById("logoutBtn").addEventListener('click', (e)=> {
-            e.preventDefault();
-            window.location.href = 'index.php';
-    })
-    }
 </script>
 </body>
 </html>
